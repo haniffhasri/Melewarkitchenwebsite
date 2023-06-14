@@ -32,10 +32,10 @@ viewUser.addEventListener('click',()=>{
     form.classList.remove('active');
     dlete.classList.remove('active');
 })
-
+//sinii
 const person = document.getElementById('John');
 const form = document.querySelector('.update-user-form');
-const dlete = document.querySelector('.delete-user-form');
+//const dlete = document.querySelector('.delete-user-form');
 const updateUser = document.querySelector('.update-users-link');
 
 person.addEventListener('click',()=>{
@@ -46,7 +46,7 @@ updateUser.addEventListener('click',()=>{
     form.classList.remove('active');
     dlete.classList.remove('active');
 })
-
+//sini
 function openMenu(evt, menuName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
