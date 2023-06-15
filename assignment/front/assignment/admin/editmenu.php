@@ -85,64 +85,52 @@
                             </tbody>
                         </table>
                         <table id="Drinks" class="wrapper tabcontent">
-                          <thead>
-                              <tr>
-                                  <th>Name</th>
-                                  <th>Image</th>
-                                  <th>Description</th>
-                                  <th>Price</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <tr id="Drinks1">
-                                  <td>Fruit Juice</td>
-                                  <td><img src="./res/jus.jpg" height="100px" width="100px"></td>
-                                  <td>There are various of flavour such as mango, orange and grape.</td>
-                                  <td>RM4.50</td>
-                              </tr>
-                              <tr id="Drinks2">
-                                  <td>Teh Tarik</td>
-                                  <td><img src="./res/tehtarik.jpg" height="100px" width="100px"></td>
-                                  <td>With Teh Tarik, you will find that it is unique.</td>
-                                  <td>RM2.00</td>
-                              </tr>
-                              <tr id="Drinks3">
-                                  <td>Air Batu Campur (ABC)</td>
-                                  <td><img src="./res/abc.jpg" height="100px" width="100px"></td>
-                                  <td>The taste and coldness of ABC will make you feel fresh</td>
-                                  <td>RM4.00</td>
-                              </tr>                             
-                          </tbody>
+                        <thead>
+                                <tr>
+                                    <th class="hidden">Drink ID</th>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php $query = "SELECT * FROM drink";
+                                  $result = $mysqli->query($query)?>
+                            <?php while ($row = $result->fetch_assoc()) { ?>
+                                <tr>
+                                <td id="drinkId" class="hidden"><?php echo $row['drinkID'];?></td>
+                                <td id="name"><?php echo $row['drinkName']; ?></td>
+                                <td id="imagePreview"><img src="./res/<?php echo $row['drinkLoc'];?>" height="100px" width="100px"></td>
+                                <td id="description"><?php echo $row['drinkDesc']; ?></td>
+                                <td id="price">RM<?php echo $row['drinkPrice']; ?></td>
+                                </tr>
+                                <?php } ?>                             
+                            </tbody>
                       </table>    
                       <table id="Dessert" class="wrapper tabcontent">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Image</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr id="Dessert1">
-                                <td>Cake</td>
-                                <td><img src="./res/kek.jpg" height="100px" width="100px"></td>
-                                <td>There are various flavour of cake that will make you like it.</td>
-                                <td>RM3.50</td>
-                            </tr>
-                            <tr id="Dessert2">
-                                <td>Caramel Pudding</td>
-                                <td><img src="./res/puding.jpg" height="100px" width="100px"></td>
-                                <td>The sweetest pudding with caramel sauce.</td>
-                                <td>RM2.50</td>
-                            </tr>
-                            <tr id="Dessert3">
-                                <td>Spaghetti</td>
-                                <td><img src="./res/spageti.jpg" height="100px" width="100px"></td>
-                                <td>Fresh tomatoes, onions, ground beef as topping of the Spaghetti.</td>
-                                <td>RM4.00</td>
-                            </tr>                             
-                        </tbody>
+                      <thead>
+                                <tr>
+                                    <th class="hidden">Dessert ID</th>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php $query = "SELECT * FROM dessert";
+                                  $result = $mysqli->query($query)?>
+                            <?php while ($row = $result->fetch_assoc()) { ?>
+                                <tr>
+                                <td id="drinkId" class="hidden"><?php echo $row['dessertID'];?></td>
+                                <td id="name"><?php echo $row['dessertName']; ?></td>
+                                <td id="imagePreview"><img src="./res/<?php echo $row['dessertLoc'];?>" height="100px" width="100px"></td>
+                                <td id="description"><?php echo $row['dessertDesc']; ?></td>
+                                <td id="price">RM<?php echo $row['dessertPrice']; ?></td>
+                                </tr>
+                                <?php } ?>                             
+                            </tbody>
                     </table>                                                                                                                                                                               
                 <!-- The form for updating user information -->
                 
@@ -150,6 +138,7 @@
                               <br><h2>Update Menu Information</h2>
                               <div class="form-group">
                               <label for="name">Name:</label>
+                              <input type="hidden" id="foodcategory" name="foodcategory">
                               <input type="hidden" id="foodID" name="foodID">
                               <input type="text" id="foodname" name="name">
                               </div>
@@ -214,8 +203,10 @@
     </script>
     <script>
   // Add event listener to table rows
-  const rows = document.querySelectorAll('#Food tbody tr');
-  rows.forEach(row => {
+  const foodRows = document.querySelectorAll('#Food tbody tr');
+  const drinkRows = document.querySelectorAll('#Drinks tbody tr');
+  const dessertRows = document.querySelectorAll('#Dessert tbody tr');
+  foodRows.forEach(row => {
     row.addEventListener('click', function() {
         form.classList.add('active');
        // dlete.classList.add('active');
@@ -233,6 +224,7 @@
 
     console.log(foodId);
       // Populate the form with the data
+      document.getElementById('foodcategory').value= 'food';
       document.getElementById('foodID').value = foodId;
       document.getElementById('foodname').value = name;
       document.getElementById('image').src = imageName;
@@ -241,6 +233,61 @@
       document.getElementById('foodprice').value = formattedPrice;
     });
   });
+  drinkRows.forEach(row => {
+    row.addEventListener('click', function() {
+        form.classList.add('active');
+       // dlete.classList.add('active');
+      // Get the data from the clicked row
+      
+    const foodId = this.cells[0].innerText;
+    const name = this.cells[1].innerText;
+    const imageSrc = this.cells[2].querySelector('img').src;
+    const description = this.cells[3].innerText;
+    const price = this.cells[4].innerText;
+    const numericPrice = parseFloat(price.replace("RM", ""));
+    const formattedPrice = numericPrice.toFixed(2);
+
+    const imageName = imageSrc.replace("http://localhost/Melewarkitchenwebsite/assignment/front/assignment/admin/", "./"); 
+
+    console.log(foodId);
+      // Populate the form with the data
+      document.getElementById('foodcategory').value= 'drink';
+      document.getElementById('foodID').value = foodId;
+      document.getElementById('foodname').value = name;
+      document.getElementById('image').src = imageName;
+      document.getElementById('imageOld').value = imageName;
+      document.getElementById('fooddescription').value = description;
+      document.getElementById('foodprice').value = formattedPrice;
+    });
+  });
+  dessertRows.forEach(row => {
+    row.addEventListener('click', function() {
+        form.classList.add('active');
+       // dlete.classList.add('active');
+      // Get the data from the clicked row
+      
+    const foodId = this.cells[0].innerText;
+    const name = this.cells[1].innerText;
+    const imageSrc = this.cells[2].querySelector('img').src;
+    const description = this.cells[3].innerText;
+    const price = this.cells[4].innerText;
+    const numericPrice = parseFloat(price.replace("RM", ""));
+    const formattedPrice = numericPrice.toFixed(2);
+
+    const imageName = imageSrc.replace("http://localhost/Melewarkitchenwebsite/assignment/front/assignment/admin/", "./"); 
+
+    console.log(foodId);
+      // Populate the form with the data
+      document.getElementById('foodcategory').value= 'dessert';
+      document.getElementById('foodID').value = foodId;
+      document.getElementById('foodname').value = name;
+      document.getElementById('image').src = imageName;
+      document.getElementById('imageOld').value = imageName;
+      document.getElementById('fooddescription').value = description;
+      document.getElementById('foodprice').value = formattedPrice;
+    });
+  });
+  
 </script>
 </body>
 </html>

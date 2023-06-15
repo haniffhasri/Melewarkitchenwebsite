@@ -43,7 +43,13 @@
                     <label>Menu name:<br><input type="text" required name="menu_name"><br></label>
                     <label>Menu description:<br><textarea rows="4" cols="50" name="menu_description"></textarea><br></label>
                     <label>Upload menu's photo: <input type="file" name="menu_photo"><br></label>
-                    <label>Menu price:<br><input type="text" required name="menu_price"><br></label>
+                    <label>Menu price:<br><input type="text" required name="menu_price"></label>
+                    <label for="category">Category:</label>
+                    <select class="form-control" name="category">
+                        <option value="food">Food</option>
+                        <option value="dessert">Dessert</option>
+                        <option value="drink">Drink</option>
+                      </select>
                     <input type="submit" value="Add Menu">        
                 </form>
                 <a href="editmenu.html"><input type="submit" value="Back"></a>
