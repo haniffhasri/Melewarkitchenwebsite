@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +12,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap">
     
+    <style>
+    .hidden {
+    display: none;
+    }
+    </style>
 
     <title>Admin | Melewar Kitchen</title>
 </head>
@@ -39,6 +45,12 @@
         <div class="user-management-section">
             <div class="admin" style="max-width: 930px;">
                 <h2>Admin Section</h2>
+                <span style="color: black;">
+                <?php include_once 'config.php';
+                $query = "SELECT * FROM food";
+                $result = $mysqli->query($query);
+                
+                ?></span>
                 <div class="user-management">
                     <h3>Menu Management</h3>
                     <ul>
@@ -53,6 +65,7 @@
                         <table id="Food" class="wrapper tabcontent">
                             <thead>
                                 <tr>
+                                    <th class="hidden">Food ID</th>
                                     <th>Name</th>
                                     <th>Image</th>
                                     <th>Description</th>
@@ -60,30 +73,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr id="John">
-                                    <td>Nasi Putih</td>
-                                    <td><img src="./res/nasiputih.jpg" height="100px" width="100px"></td>
-                                    <td>For those that want to add rice.</td>
-                                    <td>RM1.50</td>
+                            <?php while ($row = $result->fetch_assoc()) { ?>
+                                <tr>
+                                <td id="foodId" class="hidden"><?php echo $row['foodID'];?></td>
+                                <td id="name"><?php echo $row['foodName']; ?></td>
+                                <td id="imagePreview"><img src="./res/<?php echo $row['foodLoc'];?>" height="100px" width="100px"></td>
+                                <td id="description"><?php echo $row['foodDesc']; ?></td>
+                                <td id="price">RM<?php echo $row['foodPrice']; ?></td>
                                 </tr>
-                                <tr id="Food2">
-                                    <td>Nasi Bujang</td>
-                                    <td><img src="./res/nasibujang.jpg" height="100px" width="100px"></td>
-                                    <td>A plate of Nasi Putih, a bowl of soup and a plate of telur dadar.</td>
-                                    <td>RM3.50</td>
-                                </tr>
-                                <tr id="Food3">
-                                    <td>Tom Yam</td>
-                                    <td><img src="./res/tomyam.jpg" height="100px" width="100px"></td>
-                                    <td>Commercial tom yum paste is made by crushing all the herb ingredients and stir frying in oil, then adding seasoning and other preservative ingredients.</td>
-                                    <td>RM5.00</td>
-                                </tr>
-                                <tr id="Food4">
-                                    <td>Nasi Goreng Kampung</td>
-                                    <td><img src="./res/ngk.jpg" height="100px" width="100px"></td>
-                                    <td>The taste of this nasi goreng using chili paste, kangkung (water spinach or water convolvulus)), and ikan bilis (anchovies).</td>
-                                    <td>RM5.00</td>
-                                </tr>                              
+                                <?php } ?>                             
                             </tbody>
                         </table>
                         <table id="Drinks" class="wrapper tabcontent">
@@ -147,31 +145,33 @@
                         </tbody>
                     </table>                                                                                                                                                                               
                 <!-- The form for updating user information -->
-                          <form class="update-user-form" method="post">
+                
+                <form action="updatemenu.php" class="update-user-form" method="post" enctype="multipart/form-data">
                               <br><h2>Update Menu Information</h2>
                               <div class="form-group">
                               <label for="name">Name:</label>
-                              <input type="text" id="name" name="name" value="Nasi Putih">
+                              <input type="hidden" id="foodID" name="foodID">
+                              <input type="text" id="foodname" name="name">
                               </div>
                               <div class="form-group">
                               <label for="image">Image:</label>
-                              <img src="./res/nasiputih.jpg" height="100px" width="100px">
-                              <label>Upload new image to update: <input type="file"></label>
+                              <img id="image" height="100px" width="100px">
+                              <input type="hidden" id="imageOld" name="imageOld" value="hahaha">
+                              <label>Upload new image to update: <input type="file" name="imageNew"></label>
                               </div>
                               <div class="form-group">
                               <label for="description">Description:</label>
-                              <input type="text" id="description" name="description" value="For those that want to add rice.">
+                              <textarea rows="4" cols="50" type="text" id="fooddescription" name="description"></textarea>
                               </div>
                               <div class="form-group">
                                   <label for="price">Price(RM):</label>
-                                  <input type="number" id="price" name="price" value="4.50">
+                                  <input type="text" id="foodprice" name="price">
                                   </div>
-                              <input type="submit" value="Update">
+                              <input type="submit" name="update" value="Update">
+                              <input type="submit" name="delete" value="Delete">
                           </form>
-                          <form class="delete-user-form" method="post">
-                              <input type="hidden" name="user_id" value="123">
-                              <input type="submit" value="Delete">
-                          </form>
+                          
+
                     </ul>                    
  
                     </div>                 
@@ -212,5 +212,35 @@
             }
         });
     </script>
+    <script>
+  // Add event listener to table rows
+  const rows = document.querySelectorAll('#Food tbody tr');
+  rows.forEach(row => {
+    row.addEventListener('click', function() {
+        form.classList.add('active');
+       // dlete.classList.add('active');
+      // Get the data from the clicked row
+      
+    const foodId = this.cells[0].innerText;
+    const name = this.cells[1].innerText;
+    const imageSrc = this.cells[2].querySelector('img').src;
+    const description = this.cells[3].innerText;
+    const price = this.cells[4].innerText;
+    const numericPrice = parseFloat(price.replace("RM", ""));
+    const formattedPrice = numericPrice.toFixed(2);
+
+    const imageName = imageSrc.replace("http://localhost/Melewarkitchenwebsite/assignment/front/assignment/admin/", "./"); 
+
+    console.log(foodId);
+      // Populate the form with the data
+      document.getElementById('foodID').value = foodId;
+      document.getElementById('foodname').value = name;
+      document.getElementById('image').src = imageName;
+      document.getElementById('imageOld').value = imageName;
+      document.getElementById('fooddescription').value = description;
+      document.getElementById('foodprice').value = formattedPrice;
+    });
+  });
+</script>
 </body>
 </html>

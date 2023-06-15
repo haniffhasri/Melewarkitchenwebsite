@@ -39,11 +39,11 @@
         <div class="user-management-section">
             <div class="admin">
                 <h2>Add Menu Section</h2>
-                <form action="editmenu.html" method="post">
-                    <label>Menu name:<br><input type="text" required><br></label>
-                    <label>Menu description:<br><textarea rows="4" cols="50" name="comment" form="usrform" required></textarea><br><br></label>
-                    <label>Upload menu's photo: <input type="file" ><br><br></label>
-                    <label>Menu price:<br><input type="number" required><br></label>
+                <form action="addmenu.php" method="POST" enctype="multipart/form-data">
+                    <label>Menu name:<br><input type="text" required name="menu_name"><br></label>
+                    <label>Menu description:<br><textarea rows="4" cols="50" name="menu_description"></textarea><br></label>
+                    <label>Upload menu's photo: <input type="file" name="menu_photo"><br></label>
+                    <label>Menu price:<br><input type="text" required name="menu_price"><br></label>
                     <input type="submit" value="Add Menu">        
                 </form>
                 <a href="editmenu.html"><input type="submit" value="Back"></a>
