@@ -35,66 +35,57 @@
             <div class="user-management-section">
                 <div class="admin">
                   <h2 style="color: black;">Admin Section</h2>
+                  <span style="color: black;">
+                    <?php include_once 'config.php';
+                    $query = "SELECT * FROM user";
+                    $result = $mysqli->query($query);
+                    ?></span>
                   <div class="user-management">
-                    <h3 style="color: black;">User Management</h3>
+                    <h3 style="color: black;">User Information</h3>
                     <ul>
-                      <li><a href="#" class="view-users-link text-center" style="background-color: #ff726f;"><strong>View Users</strong></a></li>
-                      <p style="color: red; font-size: small">*press the column to update</p>
                       <table class="view-users-linkk">
                         <thead>
                           <tr>
+                            <th>user ID</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Phone Number</th>
                             <th>Password</th>
+                            <th>Birth Date</th>
                             <th>Address</th>
+                            <th>In Mailing List </th>
+                            <th>Operation </th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr id="John">
-                            <td>John Doe</td>
-                            <td>john.doe@gmail.com</td>
-                            <td>112233</td>
-                            <td>555-1234 LA</td>
-                          </tr>
-                          <tr id="Jane Smith">
-                            <td>Jane Smith</td>
-                            <td>jane.smith@gmail.com</td>
-                            <td>456fs</td>
-                            <td>555-5678 LA</td>
-                          </tr>
-                          <tr id="Bob Johnson">
-                            <td>Bob Johnson</td>
-                            <td>bob.johnson@gmail.com</td>
-                            <td>dfgfdg</td>
-                            <td>555-9012 LA</td>
-                          </tr>
+                        <?php 
+                                while ($row = $result->fetch_assoc()) {
+                                    $userID = $row["userID"];
+                                    $userName = $row["userName"];
+                                    $email = $row["email"];
+                                    $phoneNumber = $row["phoneNumber"]; 
+                                    $password = $row["password"];
+                                    $birthDate = $row["birthDate"]; 
+                                    $address = $row["address"];
+                                    $in_mailing_list = ($row["in_mailing_list"] == 1)?'True':'False';
+
+                                    echo 
+                                        '<tr> 
+                                            <td>'.$userID.'</td>
+                                            <td>'.$userName.'</td>  
+                                            <td>'.$email.'</td> 
+                                            <td>'.$phoneNumber.'</td> 
+                                            <td>'.$password.'</td> 
+                                            <td>'.$birthDate.'</td>
+                                            <td>'.$address.'</td>
+                                            <td>'.$in_mailing_list.'</td>
+                                            <td><a href="edit.php?id='.$userID.'">Update</a><br><a href="delete.php?id='.$userID.'">Delete</a></td> 
+                                        </tr>';
+                                }
+                                $result->free();
+                        ?>
                         </tbody>
                       </table>
-                      <!-- The form for updating user information -->
-                        <form class="update-user-form" method="post">
-                            <br><h2>Update User Information</h2>
-                            <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" value="John Doe">
-                            </div>
-                            <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" value="johndoe@example.com">
-                            </div>
-                            <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" id="password" name="password" value="112233">
-                            </div>
-                            <div class="form-group">
-                                <label for="address">Address:</label>
-                                <input type="text" id="address" name="address" value="555-1234 LA">
-                                </div>
-                            <input type="submit" value="Update">
-                        </form>
-                        <form class="delete-user-form" method="post">
-                            <input type="hidden" name="user_id" value="123">
-                            <input type="submit" value="Delete">
-                        </form>
                     </ul>
                   </div>
                 </div>
