@@ -7,13 +7,17 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="./headerfooterstyle.css">
-    <link rel="stylesheet" href="./profile.css">
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap">
     
+    <style>
+    .hidden {
+    display: none;
+    }
+    </style>    
 
-    <title>Home | Melewar Kitchen</title>
+    <title>Menu | Melewar Kitchen</title>
 </head>
 <body>
     <nav>
@@ -36,17 +40,60 @@
 
     <!----------------------------------------------- PAGE CONTENT START HERE ----------------------------------->
     <main class="bg-image">
-        <div class="row" style="max-height: 600px;">
+        <div class="row animate" style="max-height: 1000px;">
             <div class="col"><br>
-                <h1 class="text-center-topic animate">Welcome to Melewar Kitchen</h1>
-                <h2 class="text-center animate" style="margin-top: 120px; margin-bottom: -170px;">Truly Nogori Experience</h2>
-                <div class="row" >
-                    <div class="col-d-flex animate"><a href="menu.php" class="btn">Check Our Menu</a></div>
-                    <div class="col-d-flex animate"><a href="reservation.html" class="btn">Order Now</a></div>
+                <h1 class="text-center-topic">Welcome to Melewar Kitchen's</h1>
+                <h4 class="text-center">Menu</h4><br>
+                <span style="color: black;">
+                <?php include_once 'config.php';
+                $query = "SELECT * FROM food";
+                $result = $mysqli->query($query);
+                
+                ?></span>
+                <div class="tab">
+                    <button class="btn tablinks" onclick="openMenu(event, 'Food')" id="myLink">Food</button>
+                    <button class="btn tablinks" onclick="openMenu(event, 'Drinks')">Drinks</button>
+                    <button class="btn tablinks" onclick="openMenu(event, 'Dessert')">Dessert</button>                    
                 </div>
-            </div>
-            <div class="col">
-                <img src="./res/background.jpg" style="width:100%;">
+
+                <div id="Food" class="wrapper tabcontent">
+                    <?php while ($row = $result->fetch_assoc()) { ?>
+                               
+                        <h1 id="foodId" class="hidden"><?php echo $row['foodID'];?></h1>
+                        <h1 id="name"><b><?php echo $row['foodName']; ?></b><span class="box">RM<?php echo $row['foodPrice']; ?></span></h1>
+                        <img src="./res/<?php echo $row['foodLoc'];?>" height="100px" width="100px">
+                        <p id="description"><?php echo $row['foodDesc']; ?></p>
+          
+                    <?php } ?>  
+                                                         
+                </div>
+                <div id="Drinks" class="wrapper tabcontent">
+                    <?php $query = "SELECT * FROM drink";
+                        $result = $mysqli->query($query)?>
+                    <?php while ($row = $result->fetch_assoc()) { ?>
+                               
+                        <h1 id="drinkId" class="hidden"><?php echo $row['drinkID'];?></h1>
+                        <h1 id="name"><b><?php echo $row['drinkName']; ?></b><span class="box">RM<?php echo $row['drinkPrice']; ?></span></h1>
+                        <img src="./res/<?php echo $row['drinkLoc'];?>" height="100px" width="100px">
+                        <p id="description"><?php echo $row['drinkDesc']; ?></p>
+                 
+                    <?php } ?>  
+
+                </div> 
+                <div id="Dessert" class="wrapper tabcontent">
+                    <?php $query = "SELECT * FROM dessert";
+                        $result = $mysqli->query($query)?>
+                    <?php while ($row = $result->fetch_assoc()) { ?>
+                               
+                        <h1 id="dessertId" class="hidden"><?php echo $row['dessertID'];?></h1>
+                        <h1 id="name"><b><?php echo $row['dessertName']; ?></b><span class="box">RM<?php echo $row['dessertPrice']; ?></span></h1>
+                        <img src="./res/<?php echo $row['dessertLoc'];?>" height="100px" width="100px">
+                        <p id="description"><?php echo $row['dessertDesc']; ?></p>
+                 
+                    <?php } ?>  
+
+                </div>                 
+                <br>
             </div>
         </div>
     </main>
