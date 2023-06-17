@@ -26,12 +26,15 @@ closeBtn.addEventListener('click', closeNav)
 
 const viewUser = document.querySelector('.view-users-link');
 const info = document.querySelector('.view-users-linkk');
-
+info.classList.add('active');
 viewUser.addEventListener('click',()=>{
-    info.classList.toggle('active');
+    document.getElementById("myLink").click();
+    info.classList.add('active');
     form.classList.remove('active');
     dlete.classList.remove('active');
+    
 })
+
 //sinii
 const person = document.getElementById('John');
 const form = document.querySelector('.update-user-form');
@@ -47,6 +50,7 @@ updateUser.addEventListener('click',()=>{
     dlete.classList.remove('active');
 })
 //sini
+document.getElementById("myLink").click();
 function openMenu(evt, menuName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -60,6 +64,8 @@ function openMenu(evt, menuName) {
     document.getElementById(menuName).style.display = "block";
     evt.currentTarget.className += " active";
   }
+
+  
 function doneupdate(){
     alert("Done Update Menu!!");
 }
