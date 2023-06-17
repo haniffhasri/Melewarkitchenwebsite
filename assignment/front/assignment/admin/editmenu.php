@@ -54,11 +54,11 @@
                 <div class="user-management">
                     <h3>Menu Management</h3>
                     <ul>
-                        <li><a href="#" class="view-users-link text-center" style="background-color: #ff726f;"><strong>View Menu</strong></a></li>
+                    <li><a href="#" class="view-users-link text-center" style="background-color: #ff726f;"><strong>View Menu</strong></a></li>
                         <p style="color: red; font-size: small">*press the column to update</p>
                         <div class="view-users-linkk">
                             <p style="color: black;">Menu category: </p>
-                            <button class="menubutton tablinks" onclick="openMenu(event, 'Food')">Food</button>
+                            <button class="menubutton tablinks" onclick="openMenu(event, 'Food')" id="myLink">Food</button>
                             <button class="menubutton tablinks" onclick="openMenu(event, 'Drinks')">Drinks</button>
                             <button class="menubutton tablinks" onclick="openMenu(event, 'Dessert')">Dessert</button>
                         </div>

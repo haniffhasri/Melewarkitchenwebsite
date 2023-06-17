@@ -426,7 +426,7 @@ main{
     display: block;
   }
   .view-users-linkk{
-    display: none;
+    display:block;
   }
   .update-user-form{
     display: none;
