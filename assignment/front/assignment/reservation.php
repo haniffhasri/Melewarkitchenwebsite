@@ -1,4 +1,3 @@
-<?php include ('details_entry')?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +11,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap">
     
+    <style>
+    .hidden {
+    display: none;
+    }
+    </style> 
 
     <title>Home | Melewar Kitchen</title>
 </head>

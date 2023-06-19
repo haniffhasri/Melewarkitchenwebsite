@@ -28,7 +28,15 @@
             <ul class="nav-menu">
                 <li><a href="home.html">Home</a></li>
                 <li><a href="menu.php">Menu</a></li>
+<<<<<<< Updated upstream
                 <li><a href="reservation.html">Reservation</a></li>
+=======
+<<<<<<< HEAD
+                <li><a href="reservation.php">Reservation</a></li>
+=======
+                <li><a href="reservation.html">Reservation</a></li>
+>>>>>>> 087e28b056db6576b9cd35a8b59adb19a1a17a1c
+>>>>>>> Stashed changes
                 <li><a href="login.html">Login</a></li>
                 <li><a href="profile.html">Profile</a></li>
             </ul>
@@ -63,6 +71,13 @@
                         <h1 id="name"><b><?php echo $row['foodName']; ?></b><span class="box">RM<?php echo $row['foodPrice']; ?></span></h1>
                         <img src="./res/<?php echo $row['foodLoc'];?>" height="100px" width="100px">
                         <p id="description"><?php echo $row['foodDesc']; ?></p>
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+                        <hr>
+=======
+>>>>>>> 087e28b056db6576b9cd35a8b59adb19a1a17a1c
+>>>>>>> Stashed changes
           
                     <?php } ?>  
                                                          
@@ -76,6 +91,13 @@
                         <h1 id="name"><b><?php echo $row['drinkName']; ?></b><span class="box">RM<?php echo $row['drinkPrice']; ?></span></h1>
                         <img src="./res/<?php echo $row['drinkLoc'];?>" height="100px" width="100px">
                         <p id="description"><?php echo $row['drinkDesc']; ?></p>
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+                        <hr>
+=======
+>>>>>>> 087e28b056db6576b9cd35a8b59adb19a1a17a1c
+>>>>>>> Stashed changes
                  
                     <?php } ?>  
 
@@ -89,11 +111,26 @@
                         <h1 id="name"><b><?php echo $row['dessertName']; ?></b><span class="box">RM<?php echo $row['dessertPrice']; ?></span></h1>
                         <img src="./res/<?php echo $row['dessertLoc'];?>" height="100px" width="100px">
                         <p id="description"><?php echo $row['dessertDesc']; ?></p>
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+                        <hr>
+=======
+>>>>>>> 087e28b056db6576b9cd35a8b59adb19a1a17a1c
+>>>>>>> Stashed changes
                  
                     <?php } ?>  
 
                 </div>                 
+<<<<<<< Updated upstream
                 <br>
+=======
+<<<<<<< HEAD
+                
+=======
+                <br>
+>>>>>>> 087e28b056db6576b9cd35a8b59adb19a1a17a1c
+>>>>>>> Stashed changes
             </div>
         </div>
     </main>
@@ -112,7 +149,15 @@
                 <h4>Permalinks</h4>
                 <ul class="permalinks">
                     <li><a href="home.html">Home</a></li>
+<<<<<<< Updated upstream
                     <li><a href="menu.html">Menu</a></li>
+=======
+<<<<<<< HEAD
+                    <li><a href="menu.php">Menu</a></li>
+=======
+                    <li><a href="menu.html">Menu</a></li>
+>>>>>>> 087e28b056db6576b9cd35a8b59adb19a1a17a1c
+>>>>>>> Stashed changes
                     <li><a href="reservation.html">Reservation</a></li>
                     <li><a href="login.html">Login</a></li>
                     <li><a href="profile.html">Profile</a></li>
