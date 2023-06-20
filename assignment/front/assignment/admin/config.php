@@ -2,8 +2,8 @@
 
 $host = 'localhost';
 $dbname = 'melewar';
-$username = 'root';
-$password = '1234';
+$username = 'user';
+$password = 'userpwd';
 
 
 // Create a new MySQLi instance

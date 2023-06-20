@@ -28,9 +28,9 @@
             </a>
             <ul class="nav-menu">
                 <li><a href="home.html">Home</a></li>
-                <li><a href="user.html">User Management</a></li>
+                <li><a href="user.php">User Management</a></li>
                 <li><a href="table.html">Table Management</a></li>
-                <li><a href="editmenu.html">Menu Management</a></li>
+                <li><a href="editmenu.php">Menu Management</a></li>
                 <li><a href="/front/assignment/home.html">Logout</a></li>
             </ul>
             <button id="open-menu-btn"><i class="uil uil-bars"></i></button>

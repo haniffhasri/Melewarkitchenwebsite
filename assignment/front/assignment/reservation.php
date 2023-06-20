@@ -10,7 +10,12 @@
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap">
-    
+
+    <style>
+    .hidden {
+    display: none;
+    }
+    </style> 
 
     <title>Home | Melewar Kitchen</title>
 </head>
@@ -23,7 +28,7 @@
             <ul class="nav-menu">
                 <li><a href="home.html">Home</a></li>
                 <li><a href="menu.php">Menu</a></li>
-                <li><a href="reservation.html">Reservation</a></li>
+                <li><a href="reservation.php">Reservation</a></li>
                 <li><a href="login.html">Login</a></li>
                 <li><a href="profile.html">Profile</a></li>
             </ul>
@@ -36,73 +41,66 @@
     <!----------------------------------------------- PAGE CONTENT START HERE ----------------------------------->
 
     <main class="bg-image">
-        <div class="reservation_row">
+        <div class="reservation_row" style="max-height: 1500px;">
             <div class="col" style="background-image:url('res/background.jpeg');"><br>
                     <h1 class="text-center-topic" style="margin-top: -20px;">Menu it here!</h1>
+                    <span style="color: black;">
+                    <?php include_once 'config.php';
+                        $query = "SELECT * FROM food";
+                        $result = $mysqli->query($query);
+                
+                    ?></span>
                     <div class="tab">
-                        <button class="btn tablinks" onclick="openMenu(event, 'Food')">Food</button>
+                        <button class="btn tablinks" onclick="openMenu(event, 'Food')" id="myLink">Food</button>
                         <button class="btn tablinks" onclick="openMenu(event, 'Drinks')">Drinks</button>
                         <button class="btn tablinks" onclick="openMenu(event, 'Dessert')">Dessert</button>                    
                     </div>
     
-                    <div id="Food" class="wrapper tabcontent">
-                        <h1><b>Nasi Putih</b> <span class="box">RM1.50</span></h1>
-                        <img src="./res/nasiputih.jpg" height="100px" width="100px">
-                        <p>For those that want to add rice.</p>
-                        <hr>
-                     
-                        <h1><b>Nasi Bujang</b> <span class="box">RM3.50</span></h1>
-                        <img src="./res/nasibujang.jpg" height="100px" width="100px">
-                        <p>A plate of Nasi Putih, a bowl of soup and a plate of telur dadar.</p>
-                        <hr>
-                        
-                        <h1><b>Tom Yam</b> <span class="box">RM5.00</span></h1>
-                        <img src="./res/tomyam.jpg" height="100px" width="100px">
-                        <p>Commercial tom yum paste is made by crushing all the herb ingredients and stir frying in oil, then adding seasoning and other preservative ingredients.</p>
-                        <hr>
-                  
-                        <h1><b>Nasi Goreng Kampung</b> <span class="box">RM5.00</span></h1>
-                        <img src="./res/ngk.jpg" height="100px" width="100px">
-                        <p>The taste of this nasi goreng using chili paste, kangkung (water spinach or water convolvulus)), and ikan bilis (anchovies). </p>
+                    <div id="Food" class="wrapper tabcontent ex1">
+                    <?php while ($row = $result->fetch_assoc()) { ?>
+                               
+                               <h1 id="foodId" class="hidden"><?php echo $row['foodID'];?></h1>
+                               <h1 id="name"><b><?php echo $row['foodName']; ?></b><span class="box">RM<?php echo $row['foodPrice']; ?></span></h1>
+                               <img src="./res/<?php echo $row['foodLoc'];?>" height="100px" width="100px">
+                               <p id="description"><?php echo $row['foodDesc']; ?></p>
+                               <hr>
+                 
+                           <?php } ?>  
                                           
                     </div>
-                    <div id="Drinks" class="wrapper tabcontent">
-                        <h1><b>Fruit Juice</b> <span class="box">RM4.50</span></h1>
-                        <img src="./res/jus.jpg" height="100px" width="100px">
-                        <p>There are various of flavour such as mango, orange and grape.</p>
+                    <div id="Drinks" class="wrapper tabcontent ex1">
+                    <?php $query = "SELECT * FROM drink";
+                        $result = $mysqli->query($query)?>
+                    <?php while ($row = $result->fetch_assoc()) { ?>
+                               
+                        <h1 id="drinkId" class="hidden"><?php echo $row['drinkID'];?></h1>
+                        <h1 id="name"><b><?php echo $row['drinkName']; ?></b><span class="box">RM<?php echo $row['drinkPrice']; ?></span></h1>
+                        <img src="./res/<?php echo $row['drinkLoc'];?>" height="100px" width="100px">
+                        <p id="description"><?php echo $row['drinkDesc']; ?></p>
                         <hr>
-                     
-                        <h1><b>Teh Tarik</b> <span class="box">RM2.00</span></h1>
-                        <img src="./res/tehtarik.jpg" height="100px" width="100px">
-                        <p>With Teh Tarik, you will find that it is unique.</p>
-                        <hr>
-                        
-                        <h1><b>Air Batu Campur (ABC)</b> <span class="box">RM4.00</span></h1>
-                        <img src="./res/abc.jpg" height="100px" width="100px">
-                        <p>The taste and coldness of ABC will make you feel fresh</p>
+                 
+                    <?php } ?>  
                     </div> 
-                    <div id="Dessert" class="wrapper tabcontent">
-                        <h1><b>Cake</b><span class="box">RM3.50</span></h1>
-                        <img src="./res/kek.jpg" height="100px" width="100px">
-                        <p>There are various flavour of cake that will make you like it.</p>
+                    <div id="Dessert" class="wrapper tabcontent ex1">
+                    <?php $query = "SELECT * FROM dessert";
+                        $result = $mysqli->query($query)?>
+                    <?php while ($row = $result->fetch_assoc()) { ?>
+                               
+                        <h1 id="dessertId" class="hidden"><?php echo $row['dessertID'];?></h1>
+                        <h1 id="name"><b><?php echo $row['dessertName']; ?></b><span class="box">RM<?php echo $row['dessertPrice']; ?></span></h1>
+                        <img src="./res/<?php echo $row['dessertLoc'];?>" height="100px" width="100px">
+                        <p id="description"><?php echo $row['dessertDesc']; ?></p>
                         <hr>
-                     
-                        <h1><b>Caramel Pudding</b> <span class="box">RM2.50</span></h1>
-                        <img src="./res/puding.jpg" height="100px" width="100px">
-                        <p>The sweetest pudding with caramel sauce.</p>
-                        <hr>
-                        
-                        <h1><b>Spaghetti</b> <span class="box">RM4.00</span></h1>
-                        <img src="./res/spageti.jpg" height="100px" width="100px">
-                        <p>Fresh tomatoes, onions, ground beef as topping of the Spaghetti.</p>
+                 
+                    <?php } ?>  
                     </div>                 
                     <br>
             </div>
             
-            <div class="col" style="max-height: 90vh">
+            <div class="col" style="height: 600px;">
                 <div class="container-reservation animate">
                     <h1>Book a Table</h1>
-                    <form action="#" method="post">
+                    <form action="details_entry.php" method="post">
                         <div class="form-group">
                             <label class="reservation" for="name" style="display: inline-block; margin-right: 100px; text-align: left;">Name:</label>
                             <input type="text" id="name" name="name" required>
