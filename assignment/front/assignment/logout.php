@@ -2,5 +2,5 @@
 session_start();
 unset($_SESSION["username"]);
 //header("Location: home.php");
-echo "登出成功";
+echo "Log out successfully";
 ?>

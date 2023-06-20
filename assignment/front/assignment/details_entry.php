@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $item4Quantity = $_POST['item4-quantity'];
     $item5 = $_POST['item5'];
     $item5Quantity = $_POST['item5-quantity'];
+    echo '<br>'.'<br>'.'masa'.$time;
     
     // TODO: Perform input validation and sanitization
     
@@ -26,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $servername = "localhost";
     $username = "user";
     $password = "userpwd";
-    $database = "reservation";
+    $database = "melewar";
     
     $conn = mysqli_connect($servername, $username, $password, $database);
     
