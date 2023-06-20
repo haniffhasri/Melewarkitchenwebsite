@@ -22,15 +22,15 @@
 <body>
     <nav>
         <div class="container nav-container">
-            <a href="home.html">
+            <a href="home.php">
                 <img src="./res/logo.jpg"  alt="melewarkitchenlogo" width="100px">
             </a>
             <ul class="nav-menu">
-                <li><a href="home.html">Home</a></li>
+                <li><a href="home.php">Home</a></li>
                 <li><a href="menu.php">Menu</a></li>
                 <li><a href="reservation.php">Reservation</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="profile.html">Profile</a></li>
+                <li><a href="login.php">Login</a></li>
+                <li><a href="profile.php">Profile</a></li>
             </ul>
             <button id="open-menu-btn"><i class="uil uil-bars"></i></button>
             <button id="close-menu-btn"><i class="uil uil-multiply"></i></button>
@@ -91,7 +91,7 @@
                         <img src="./res/<?php echo $row['dessertLoc'];?>" height="100px" width="100px">
                         <p id="description"><?php echo $row['dessertDesc']; ?></p>
                         <hr>
-                 
+                    
                     <?php } ?>  
                     </div>                 
                     <br>
@@ -120,11 +120,18 @@
                                 <label class="reservation" for="date"style="text-align: left;" >Date:</label>
                                 <input type="date" id="date" name="date" required style="margin-right: 20px;">
                             </div>
-    
-                            <div style="display: inline-block;">
-                                <label class="reservation" for="time" >Time:</label>
-                                <input type="time" id="time" name="time" required >
-                            </div>
+                        </div>
+                        <div class="form-group">
+                            
+                                <label class="reservation" for="time" >Time (in system 24h):</label>
+                                <select id="time" name="time" required>
+                                <option value="">Select a time</option>
+                                <option value="1">09:00 - 11:00</option>
+                                <option value="2">11:00 - 13:00</option>
+                                <option value="3">13:00 - 15:00</option>
+                                <option value="4">15:00 - 17:00</option>
+                                </select>
+                            
                         </div>
             
                         
@@ -157,31 +164,31 @@
                         <div>
                           <label for="item1">Item 1:</label>
                           <input type="text" id="item1" name="item1" placeholder="Enter item name" required>
-                          <input type="number" id="item1-quantity" name="item1-quantity" placeholder="Quantity" min="1" max="10" required>
+                          <input type="number" id="item1-quantity" name="item1-quantity" placeholder="Quantity" min="1" max="10">
                         </div>
                       
                         <div>
                           <label for="item2">Item 2:</label>
-                          <input type="text" id="item2" name="item2" placeholder="Enter item name" required>
-                          <input type="number" id="item2-quantity" name="item2-quantity" placeholder="Quantity" min="1" max="10" required>
+                          <input type="text" id="item2" name="item2" placeholder="Enter item name">
+                          <input type="number" id="item2-quantity" name="item2-quantity" placeholder="Quantity" min="1" max="10">
                         </div>
                       
                         <div>
                           <label for="item3">Item 3:</label>
-                          <input type="text" id="item3" name="item3" placeholder="Enter item name" required>
-                          <input type="number" id="item3-quantity" name="item3-quantity" placeholder="Quantity" min="1" max="10" required>
+                          <input type="text" id="item3" name="item3" placeholder="Enter item name">
+                          <input type="number" id="item3-quantity" name="item3-quantity" placeholder="Quantity" min="1" max="10">
                         </div>
                       
                         <div>
                           <label for="item4">Item 4:</label>
                           <input type="text" id="item4" name="item4" placeholder="Enter item name" required>
-                          <input type="number" id="item4-quantity" name="item4-quantity" placeholder="Quantity" min="1" max="10" required>
+                          <input type="number" id="item4-quantity" name="item4-quantity" placeholder="Quantity" min="1" max="10">
                         </div>
             
                         <div>
                             <label for="item5">Item 5:</label>
                             <input type="text" id="item5" name="item5" placeholder="Enter item name" required>
-                            <input type="number" id="item5-quantity" name="item5-quantity" placeholder="Quantity" min="1" max="10" required>
+                            <input type="number" id="item5-quantity" name="item5-quantity" placeholder="Quantity" min="1" max="10">
                         </div>
             
                         <input type="submit" value="Book Table">

@@ -74,10 +74,6 @@ include_once 'nav.php';
                         <td id="address" style="text-align: left;">No saved address</td>
                     </tr>
                     <tr>
-                        <td style="display: flex; align-items: center;"><img src="res/profile_pay.png" style="width: 20px; margin-right: 30px;">Payment  : </td>
-                        <td id="payment" style="text-align: left;">No payment information</td>
-                    </tr>
-                    <tr>
                         <td colspan="1" style="text-align: center;color:red"">* Indicates required field. </td>
                     </tr>
                 </table>
