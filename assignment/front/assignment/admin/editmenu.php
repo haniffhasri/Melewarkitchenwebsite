@@ -56,22 +56,12 @@
                     <ul>
                     <li><a href="#" class="view-users-link text-center" style="background-color: #ff726f;"><strong>View Menu</strong></a></li>
                         <p style="color: red; font-size: small">*press the column to update</p>
-<<<<<<< HEAD
-                        
-                        <p style="color: black;">Menu category: </p>
-
-                        <button class="menubutton tablinks" onclick="openMenu(event, 'Food')" id="myLink">Food</button>
-                        <button class="menubutton tablinks" onclick="openMenu(event, 'Drinks')">Drinks</button>
-                        <button class="menubutton tablinks" onclick="openMenu(event, 'Dessert')">Dessert</button>
-                        
-=======
                         <div class="view-users-linkk">
                             <p style="color: black;">Menu category: </p>
                             <button class="menubutton tablinks" onclick="openMenu(event, 'Food')" id="myLink">Food</button>
                             <button class="menubutton tablinks" onclick="openMenu(event, 'Drinks')">Drinks</button>
                             <button class="menubutton tablinks" onclick="openMenu(event, 'Dessert')">Dessert</button>
                         </div>
->>>>>>> 087e28b056db6576b9cd35a8b59adb19a1a17a1c
                         <table id="Food" class="wrapper tabcontent">
                             <thead>
                                 <tr>
