@@ -16,22 +16,10 @@
     <title>Home | Melewar Kitchen</title>
 </head>
 <body>
-    <nav>
-        <div class="container nav-container">
-            <a href="home.html">
-                <img src="./res/logo.jpg"  alt="melewarkitchenlogo" width="100px">
-            </a>
-            <ul class="nav-menu">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="menu.php">Menu</a></li>
-                <li><a href="reservation.php">Reservation</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="profile.html">Profile</a></li>
-            </ul>
-            <button id="open-menu-btn"><i class="uil uil-bars"></i></button>
-            <button id="close-menu-btn"><i class="uil uil-multiply"></i></button>
-        </div>
-    </nav>
+<?php
+    session_start();
+    include_once 'nav.php';
+?>
     <!---------------------------------------------------- END OF NAVBAR ---------------------------------------->
 
     <!----------------------------------------------- PAGE CONTENT START HERE ----------------------------------->
@@ -42,7 +30,7 @@
                 <h2 class="text-center animate" style="margin-top: 120px; margin-bottom: -170px;">Truly Nogori Experience</h2>
                 <div class="row" >
                     <div class="col-d-flex animate"><a href="menu.php" class="btn">Check Our Menu</a></div>
-                    <div class="col-d-flex animate"><a href="reservation.html" class="btn">Order Now</a></div>
+                    <div class="col-d-flex animate"><a href="reservation.php" class="btn">Order Now</a></div>
                 </div>
             </div>
             <div class="col">
@@ -64,11 +52,11 @@
             <div class="footer-2">
                 <h4>Permalinks</h4>
                 <ul class="permalinks">
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="menu.html">Menu</a></li>
-                    <li><a href="reservation.html">Reservation</a></li>
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="home.php">Home</a></li>
+                    <li><a href="menu.php">Menu</a></li>
+                    <li><a href="reservation.php">Reservation</a></li>
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="profile.php">Profile</a></li>
                 </ul>
             </div>
 
