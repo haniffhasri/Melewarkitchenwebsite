@@ -6,42 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="./admin.css">
+    <link rel="stylesheet" href="./headerfooterstyle.css">
+    <link rel="stylesheet" href="./profile.css">
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap">
     
 
-    <title>Admin | Melewar Kitchen</title>
+    <title>Home | Melewar Kitchen</title>
 </head>
 <body>
-    <nav>
-        <div class="container nav-container">
-            <a href="home.html">
-                <img src="./res/logo.jpg"  alt="melewarkitchenlogo" width="100px">
-            </a>
-            <ul class="nav-menu">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="user.php">User Management</a></li>
-                <li><a href="table.html">Table Management</a></li>
-                <li><a href="editmenu.php">Menu Management</a></li>
-                <li><a href="/front/assignment/home.html">Logout</a></li>
-            </ul>
-            <button id="open-menu-btn"><i class="uil uil-bars"></i></button>
-            <button id="close-menu-btn"><i class="uil uil-multiply"></i></button>
-        </div>
-    </nav>
+<?php
+    session_start();
+    include_once 'nav.php';
+?>
     <!---------------------------------------------------- END OF NAVBAR ---------------------------------------->
 
     <!----------------------------------------------- PAGE CONTENT START HERE ----------------------------------->
     <main class="bg-image">
         <div class="row" style="max-height: 600px;">
             <div class="col"><br>
-                <h1 class="text-center-topic animate">Admin @ Melewar Kitchen</h1>
-                <h4 class="text-center animate">Truly Nogori Experience</h4>
-                <div class="row" style="height: 50%;">
-                    <div class="col-d-flex animate"><a href="editmenu.php" class="btn">Menu Setting</a></div>
-                    <div class="col-d-flex animate"><a href="table.html" class="btn">Booking List</a></div>
+                <h1 class="text-center-topic animate">Welcome to Melewar Kitchen</h1>
+                <h2 class="text-center animate" style="margin-top: 120px; margin-bottom: -170px;">Truly Nogori Experience</h2>
+                <div class="row" >
+                    <div class="col-d-flex animate"><a href="menu.html" class="btn">Check Our Menu</a></div>
+                    <div class="col-d-flex animate"><a href="reservation.html" class="btn">Order Now</a></div>
                 </div>
             </div>
             <div class="col">
@@ -64,10 +53,10 @@
                 <h4>Permalinks</h4>
                 <ul class="permalinks">
                     <li><a href="home.html">Home</a></li>
-                    <li><a href="user.html">User Management</a></li>
-                    <li><a href="table.html">Table Management</a></li>
-                    <li><a href="editmenu.html">Menu Management</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="reservation.html">Reservation</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="profile.html">Profile</a></li>
                 </ul>
             </div>
 
@@ -111,7 +100,7 @@
     <!------------------------------------------------ End Of Footer ---------------------------------------------->
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-    <script src="./admin.js"></script>
+    <script src="./navmenu.js"></script>
 
     <script>
         var swiper = new Swiper(".mySwiper", {
@@ -131,3 +120,4 @@
     </script>
 </body>
 </html>
+
