@@ -19,30 +19,30 @@ if(isPost()){
     $userID = $_POST['userID'];
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "邮箱格式不对：" .$email;
+        echo "Incorrect email format" .$email;
         die();
     }
 
     $query = "select * from user where userName ='".$userName."' and userID <>".$userID;
     $result = $mysqli->query($query);
     if($result->num_rows > 0){
-        echo "已经存在此用户：" .$userName;
+        echo "This username already exists" .$userName;
         die();
     }
 
     $query = "select * from user where email ='".$email."' and userID <>".$userID;
     $result = $mysqli->query($query);
     if($result->num_rows > 0){
-        echo "已经存在此邮箱：" .$email;
+        echo "This email already exists" .$email;
         die();
     }
 
     $query = "update `user` set userName='".$userName."',email='".$email."' where userID=".$userID;
     if ($mysqli->query($query)) {
-        echo "更新成功";
+        echo "Update profile successfully!";
     } else {
         // Execution failed
-        echo "更新失败！";
+        echo "Update profile failed!";
     }
     die();
 }
@@ -107,10 +107,6 @@ include_once 'nav.php';
                     <input type="text" id="address" name="address" >
                   </div>
                 
-                  <div class="form-group">
-                    <label for="payment">Payment:</label>
-                    <input type="text" id="payment" name="payment">
-                  </div>
                   <div >
                     <label style="color:red">*Indicates required field.</label> 
                 </div>

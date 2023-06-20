@@ -64,7 +64,7 @@ if(isPost()) {
     <main class="bg-image">
         <div class="border">
             <div class="form-box login">
-                <h2>Login</h2>
+                <h2>Register successfully! You can login now!</h2>
                 <form action="login.php" method="post">
                     <div class="input-box">
                         <span class="icon"><ion-icon name="mail"></ion-icon></span>
@@ -128,7 +128,7 @@ if(isPost()) {
     <footer class="footer">
         <div class="container footer-container">
             <div class="footer-1">
-                <a href="home.php" class="footer-logo"><h4>Melewar Kitchen</h4></a>
+                <a href="home.html" class="footer-logo"><h4>Melewar Kitchen</h4></a>
                 <p>
                     Your Favourite Delicacies,<br> Truly Nogori!
                 </p>
@@ -137,11 +137,11 @@ if(isPost()) {
             <div class="footer-2">
                 <h4>Permalinks</h4>
                 <ul class="permalinks">
-                    <li><a href="home.php">Home</a></li>
-                    <li><a href="menu.php">Menu</a></li>
-                    <li><a href="reservation.php">Reservation</a></li>
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href="profile.php">Profile</a></li>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="reservation.html">Reservation</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="profile.html">Profile</a></li>
                 </ul>
             </div>
 
