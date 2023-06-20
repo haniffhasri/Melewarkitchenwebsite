@@ -1,27 +1,13 @@
 <?php 
-    if(isset($_GET['userID'])) {
-        include 'config.php';
-        $query = "SELECT * FROM user WHERE userID =".$_GET['userID'];
-
-        if ($result = $mysqli->query($query)) {
-            while ($row = $result->fetch_assoc()) {
-                $userID = $_GET["userID"];
-                $userName = $row["userName"];
-                $email = $row["email"];
-                $phoneNumber = $row["phoneNumber"]; 
-                $password = $row["password"];
-                $birthDate = $row["birthDate"]; 
-                $address = $row["address"];
-                $in_mailing_list = ($row["in_mailing_list"] == 1)?'True':'False';
-            }
-            $result->free();
-        } 
-    } else {
-        header('Location: user.php');
-        exit();
-    }
-    
-    
+    include_once 'config.php';
+    $userID = $_POST['userID'];
+    $userName = $_POST['userName'];
+    $email = $_POST['email'];
+    $phoneNumber = $_POST['phoneNumber'];
+    $password = $_POST['password'];
+    $birthDate = $_POST['birthDate'];
+    $address = $_POST['address'];
+    echo '<br>'.$userID;
 ?>
 
 <html>
@@ -64,19 +50,23 @@
                   <div class="user-management">
                     <h3 style="color: black;">User Management</h3>
                     <ul>
-                      <li><a href="#" class="view-users-link text-center" style="background-color: #ff726f;"><strong>View Users</strong></a></li>
-                      <p style="color: red; font-size: small">*press the column to update</p>
                       <form class="register__form" action="update.php" method="post">
                         <input type="hidden" name="userID" value="<?php echo $userID ?>">
+                        <label>Name:</label>
                         <input type="text" name="userName" required value="<?php echo $userName ?>">
+                        <label>Email:</label>
                         <input type="email" name="email" required value="<?php echo $email ?>">
-                        <input type="text" name="phoneNumber" required value="<?php echo $phoneNumber ?>">
+                        <label>Phone Number:</label>
+                        <input type="text" name="phoneNumber" value="<?php echo $phoneNumber ?>">
+                        <label>Password:</label>
                         <input type="text" name="password" required value="<?php echo $password ?>">
-                        <input type="text" name="birthDate" required value="<?php echo $birthDate ?>">
-                        <input type="text" name="address" required value="<?php echo $address ?>">
-                        In Mailing List: <input type="checkbox" name="in_mailing_list" value="1">
-                        <input class="btn btn-primary" type="submit" value="Edit">
+                        <label>Birth Date:</label>
+                        <input type="date" name="birthDate" class="form-control" value="<?php echo $birthDate ?>">
+                        <label>Address:</label>
+                        <input type="text" name="address" value="<?php echo $address ?>">
+                        <input class="btn btn-primary" type="submit" value="Confirm">
                       </form>
+                      <input class="btn btn-primary" type="submit" value="Back" onclick="window.location.href = 'user.php';">
                     </ul>
                   </div>
                 </div>

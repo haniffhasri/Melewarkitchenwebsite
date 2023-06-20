@@ -20,9 +20,9 @@
                 </a>
                 <ul class="nav-menu">
                     <li><a href="home.html">Home</a></li>
-                    <li><a href="user.html">User Management</a></li>
+                    <li><a href="user.php">User Management</a></li>
                     <li><a href="table.html">Table Management</a></li>
-                    <li><a href="editmenu.html">Menu Management</a></li>
+                    <li><a href="editmenu.php">Menu Management</a></li>
                     <li><a href="/front/assignment/home.html">Logout</a></li>
                 </ul>
                 <button id="open-menu-btn"><i class="uil uil-bars"></i></button>
@@ -53,7 +53,6 @@
                             <th>Password</th>
                             <th>Birth Date</th>
                             <th>Address</th>
-                            <th>In Mailing List </th>
                             <th>Operation </th>
                           </tr>
                         </thead>
@@ -67,8 +66,6 @@
                                     $password = $row["password"];
                                     $birthDate = $row["birthDate"]; 
                                     $address = $row["address"];
-                                    $in_mailing_list = ($row["in_mailing_list"] == 1)?'True':'False';
-
                                     echo 
                                         '<tr> 
                                             <td>'.$userID.'</td>
@@ -78,8 +75,21 @@
                                             <td>'.$password.'</td> 
                                             <td>'.$birthDate.'</td>
                                             <td>'.$address.'</td>
-                                            <td>'.$in_mailing_list.'</td>
-                                            <td><a href="edit.php?id='.$userID.'">Update</a><br><a href="delete.php?id='.$userID.'">Delete</a></td> 
+                                            <td>
+                                            <form action="edit.php" method="POST">
+                                            <input type="hidden" name="userID" value='.$userID.'>
+                                            <input type="hidden" name="userName" value='.$userName.'>
+                                            <input type="hidden" name="email" value='.$email.'>
+                                            <input type="hidden" name="phoneNumber" value='.$phoneNumber.'>
+                                            <input type="hidden" name="password" value='.$password.'>
+                                            <input type="hidden" name="birthDate" value='.$birthDate.'>
+                                            <input type="hidden" name="address" value='.$address.'>
+                                            <input type="submit" name="update" value="Update">
+                                            </form>
+                                            <form action="delete.php" method="POST">
+                                            <input type="hidden" name="userID" value='.$userID.'>
+                                            <input type="submit" name="delete" value="Delete">
+                                            </form></td>
                                         </tr>';
                                 }
                                 $result->free();
