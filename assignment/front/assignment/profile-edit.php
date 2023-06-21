@@ -3,7 +3,7 @@ session_start();
 include_once 'config.php';
 $user=[];
 
-$query = "select * from user where userName ='".$_SESSION["username"]."'";
+$query = "select * from user where userID ='".$_SESSION["userID"]."'";
 $result = $mysqli->query($query);
 if($result->num_rows > 0){
     $data=[];
@@ -13,36 +13,39 @@ if($result->num_rows > 0){
     $user=$data[0];
 }
 
-if(isPost()){
+if(isset($_POST)){
     $email = $_POST['email'];
     $userName = $_POST['userName'];
     $userID = $_POST['userID'];
+    $phoneNumber = $_POST['phone'];
+    $birthDate = $_POST['birthday'];
+    $password = $_POST['password'];
+    $address = $_POST['address'];
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Incorrect email format" .$email;
-        die();
-    }
 
-    $query = "select * from user where userName ='".$userName."' and userID <>".$userID;
+    $query = "UPDATE `user` SET userName='".$userName."', email='".$email."', password='".$password."', address='".$address."' WHERE userID=".$userID;
+
     $result = $mysqli->query($query);
     if($result->num_rows > 0){
-        echo "This username already exists" .$userName;
+        echo "<script>alert('This username already exists.');</script>";
         die();
     }
 
     $query = "select * from user where email ='".$email."' and userID <>".$userID;
     $result = $mysqli->query($query);
     if($result->num_rows > 0){
-        echo "This email already exists" .$email;
+        echo "<script>alert('This email already exists.');</script>";
         die();
     }
 
-    $query = "update `user` set userName='".$userName."',email='".$email."' where userID=".$userID;
+    $query = "UPDATE `user` SET userName='".$userName."', email='".$email."', phoneNumber='".$phoneNumber."', password='".$password."', birthDate='".$birthDate."', address='".$address."' WHERE userID=".$userID;
+
     if ($mysqli->query($query)) {
-        echo "Update profile successfully!";
+        header("Location: profile.php");
+        
     } else {
         // Execution failed
-        echo "Update profile failed!";
+        echo "Update Filed. Please try again.！";
     }
     die();
 }
@@ -89,24 +92,23 @@ include_once 'nav.php';
 
                   <div class="form-group">
                     <label for="phone">*Phone:</label>
-                    <input type="text" id="phone" name="phone" value="">
+                    <input type="text" id="phone" name="phone" value="<?php echo $user['phoneNumber']?>">
                   </div>
                 
                   <div class="form-group">
                     <label for="password">*Password:</label>
-                    <input type="password" id="password" name="password" value="">
+                    <input type="password" id="password" name="password" value="<?php echo $user['password']?>">
                   </div>
                 
                   <div class="form-group">
                     <label for="birthday">Birthday:</label>
-                    <input type="date" id="birthday" name="birthday">
+                    <input type="date" id="birthday" name="birthday" value="<?php echo $user['birthDate']?>">
                   </div>
                 
                   <div class="form-group">
                     <label for="address">Address:</label>
-                    <input type="text" id="address" name="address" >
+                    <input type="text" id="address" name="address" value="<?php echo $user['address']?>">
                   </div>
-                
                   <div >
                     <label style="color:red">*Indicates required field.</label> 
                 </div>
@@ -116,61 +118,7 @@ include_once 'nav.php';
     </div>
 </main>
 
-<!-- <main class="bg-image">
-    <div class="row" style="height: 600px;">
-        <div class="col">
-            <h1 class="text-center-topic">Welcome to Melewar Kitchen</h1>
-            <h3 class="text-center">Truly Nogori Experience</h3>
-            <div class="row" style="height: 50%;">
-                <div class="col-d-flex"><a href="menu.html" class="btn">Check Our Menu</a></div>
-                <div class="col-d-flex"><a href="reservation.html" class="btn">Order Now</a></div>
-            </div>
-        </div>
-        <div class="col" style="background-image:url('res/profile_table.jpeg');">
-            <div class="heading" ><h1 class="text-center-topic">Edit Profile</h1></div>
-            <br>
-            <form action="profile.html" method="get" class="form-container">
-                <div class="form-group">
-                    <label for="name"><h4 class="text-center">*Name:</h4></label>
-                    <input type="text" id="name" name="name">
-                  </div>
-                
-                  <div class="form-group">
-                    <label for="email"><h4 class="text-center">*Email:</h4></label>
-                    <input type="email" id="email" name="email">
-                  </div>
-                
-                  <div class="form-group">
-                    <label for="phone"><h4 class="text-center">*Phone:</h4></label>
-                    <input type="text" id="phone" name="phone">
-                  </div>
-                
-                  <div class="form-group">
-                    <label for="password"><h4 class="text-center">*Password:</h4></label>
-                    <input type="password" id="password" name="password">
-                  </div>
-                
-                  <div class="form-group">
-                    <label for="birthday"><h4 class="text-center">Birthday:</h4></label>
-                    <input type="date" id="birthday" name="birthday">
-                  </div>
-                
-                  <div class="form-group">
-                    <label for="address"><h4 class="text-center">Address:</h4></label>
-                    <input type="text" id="address" name="address">
-                  </div>
-                
-                  <div class="form-group">
-                    <label for="payment"><h4 class="text-center">Payment:</h4></label>
-                    <input type="text" id="payment" name="payment">
-                  </div>
-                
-                  <input class="btn" type="submit" value="Save">
-            </form>
 
-        </div>
-    </div>
-</main> -->
 <!------------------------------------------------- END OF PAGE CONTENT ------------------------------------->
 
 <footer class="footer">
@@ -233,6 +181,12 @@ include_once 'nav.php';
 <!------------------------------------------------ End Of Footer ---------------------------------------------->
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script src="./navmenu.js"></script>
-
+<script>
+        <?php
+            if ($result->num_rows > 0) {
+              
+            }
+        ?>
+    </script>
 </body>
 </html>

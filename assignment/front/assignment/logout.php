@@ -1,6 +1,6 @@
 <?php
 session_start();
-unset($_SESSION["username"]);
+unset($_SESSION["userID"]);
 //header("Location: home.php");
-echo "Log out successfully";
+header("Location: home.php");
 ?>

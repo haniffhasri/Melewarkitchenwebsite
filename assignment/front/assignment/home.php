@@ -29,8 +29,8 @@
                 <h1 class="text-center-topic animate">Welcome to Melewar Kitchen</h1>
                 <h2 class="text-center animate" style="margin-top: 120px; margin-bottom: -170px;">Truly Nogori Experience</h2>
                 <div class="row" >
-                    <div class="col-d-flex animate"><a href="menu.php" class="btn">Check Our Menu</a></div>
-                    <div class="col-d-flex animate"><a href="reservation.php" class="btn">Order Now</a></div>
+                    <div class="col-d-flex animate"><a href="menu.html" class="btn">Check Our Menu</a></div>
+                    <div class="col-d-flex animate"><a href="reservation.html" class="btn">Order Now</a></div>
                 </div>
             </div>
             <div class="col">
@@ -52,11 +52,11 @@
             <div class="footer-2">
                 <h4>Permalinks</h4>
                 <ul class="permalinks">
-                    <li><a href="home.php">Home</a></li>
-                    <li><a href="menu.php">Menu</a></li>
-                    <li><a href="reservation.php">Reservation</a></li>
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href="profile.php">Profile</a></li>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="reservation.html">Reservation</a></li>
+                    <li><a href="login.html">Login / Registr</a></li>
+                    <li><a href="profile.html">Profile</a></li>
                 </ul>
             </div>
 

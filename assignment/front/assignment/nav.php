@@ -1,23 +1,23 @@
 
-    <nav>
+<nav>
         <div class="container nav-container">
-            <a href="home.html">
+            <a href="home.php">
                 <img src="./res/logo.jpg"  alt="melewarkitchenlogo" width="100px">
             </a>
             <ul class="nav-menu">
                 <li><a href="home.php">Home</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="reservation.html">Reservation</a></li>
+                <li><a href="menu.php">Menu</a></li>
 
                 <?php
-                if (isset($_SESSION["username"]))
+                if (isset($_SESSION["userID"]))
                 {
                     ?>
+                    <li><a href="reservation.php">Reservation</a></li>
                     <li><a href="logout.php">logout</a></li>
                     <li><a href="profile.php">Profile</a></li>
                 <?php }else{
                     ?>
-                    <li><a href="login.php">Login</a></li>
+                    <li><a href="loginmain.php">Login / Register</a></li>
                        <?php
                 }
                 ?>

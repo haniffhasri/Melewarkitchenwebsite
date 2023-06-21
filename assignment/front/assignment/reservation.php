@@ -20,22 +20,25 @@
     <title>Home | Melewar Kitchen</title>
 </head>
 <body>
-    <nav>
-        <div class="container nav-container">
-            <a href="home.php">
-                <img src="./res/logo.jpg"  alt="melewarkitchenlogo" width="100px">
-            </a>
-            <ul class="nav-menu">
-                <li><a href="home.php">Home</a></li>
-                <li><a href="menu.php">Menu</a></li>
-                <li><a href="reservation.php">Reservation</a></li>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="profile.php">Profile</a></li>
-            </ul>
-            <button id="open-menu-btn"><i class="uil uil-bars"></i></button>
-            <button id="close-menu-btn"><i class="uil uil-multiply"></i></button>
-        </div>
-    </nav>
+<header>
+    <?php
+    session_start();
+    include_once 'nav.php';
+
+    include_once 'config.php';
+    $user=[];
+
+    $query = "select * from user where userID ='".$_SESSION["userID"]."'";
+    $result = $mysqli->query($query);
+    if($result->num_rows > 0){
+        $data=[];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $data[]=$row;
+        }
+        $user=$data[0];
+    }
+?>
+</header>
     <!---------------------------------------------------- END OF NAVBAR ---------------------------------------->
 
     <!----------------------------------------------- PAGE CONTENT START HERE ----------------------------------->
@@ -103,17 +106,17 @@
                     <form action="details_entry.php" method="post">
                         <div class="form-group">
                             <label class="reservation" for="name" style="display: inline-block; margin-right: 100px; text-align: left;">Name:</label>
-                            <input type="text" id="name" name="name" required>
+                            <input type="text" id="name" name="name" required value="<?php echo $user['userName']?>">
                         </div>
 
                         <div class="form-group">
                             <label class="reservation" for="email" style="display: inline-block; margin-right: 100px; text-align: left;">Email:</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" required value="<?php echo $user['email']?>">
                         </div>
         
                         <div class="form-group">
                             <label class="reservation" for="phone" style="display: inline-block; margin-right: 100px; text-align: left;">Phone:</label>
-                            <input type="tel" id="phone" name="phone" required>
+                            <input type="tel" id="phone" name="phone" required value="<?php echo $user['phoneNumber']?>">
                         </div>
                         <div class="form-group" >
                             <div style="display: inline-block;">

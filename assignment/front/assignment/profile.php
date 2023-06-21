@@ -3,7 +3,7 @@ session_start();
 include_once 'config.php';
 $user=[];
 
-    $query = "select * from user where userName ='".$_SESSION["username"]."'";
+    $query = "select * from user where userID ='".$_SESSION["userID"]."'";
     $result = $mysqli->query($query);
     if($result->num_rows > 0){
         $data=[];
@@ -59,22 +59,30 @@ include_once 'nav.php';
                     </tr>
                     <tr>
                         <td style="display: flex; align-items: center;"><img src="res/profile_phone.png" style="width: 20px; margin-right: 30px;">*Phone number   : </td>
-                        <td id="phone" style="text-align: left;">+60 123 456 7890</td>
+                        <td id="phone" style="text-align: left;">
+                            <?php echo $user['phoneNumber']?>
+                        </td>
                     </tr>
                     <tr>
                         <td style="display: flex; align-items: center;"><img src="res/profile_pass.png" style="width: 20px; margin-right: 30px;">*Password : </td>
-                        <td id="password" style="text-align: left;">123456</td>
+                        <td id="password" style="text-align: left;">
+                            <?php echo $user['password']?>
+                        </td>
                     </tr>
                     <tr>
                         <td style="display: flex; align-items: center;"><img src="res/profile_birth.png" style="width: 20px; margin-right: 30px;">Birthday  : </td>
-                        <td id="birthday" style="text-align: left;">____/__/__</td>
+                        <td id="birthday" style="text-align: left;">
+                        <?php echo $user['birthDate']?>
+                        </td>
                     </tr>
                     <tr>
                         <td style="display: flex; align-items: center;"><img src="res/profile_address.png" style="width: 20px; margin-right: 30px;">Address  : </td>
-                        <td id="address" style="text-align: left;">No saved address</td>
+                        <td id="address" style="text-align: left;">
+                            <?php echo $user['address']?>
+                        </td>
                     </tr>
                     <tr>
-                        <td colspan="1" style="text-align: center;color:red"">* Indicates required field. </td>
+                        <td colspan="1" style="text-align: center;color:red">* Indicates required field. </td>
                     </tr>
                 </table>
             </div>
@@ -169,12 +177,13 @@ include_once 'nav.php';
 
     // add event to every button
     deleteButton.addEventListener('click', (event) => {
-        let flag = window.confirm("Are you sure to delete this account?")
-        if (!flag) {
-            return false
-        } else {
-            window.location.href = "home.html"
-        }
+        //let flag = window.confirm("Are you sure to delete this account?")
+        //if (!flag) {
+        //    return false
+        //} else {
+         //   window.location.href = "home.html"
+        //}
+        window.location.href = "checkDelete.php"
     })
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -184,7 +193,6 @@ include_once 'nav.php';
     const password = urlParams.get('password');
     const address = urlParams.get('address');
     const birthday = urlParams.get('birthday');
-    const payment = urlParams.get('payment');
 
     if (name) document.getElementById("name").innerHTML = name;
     if (email) document.getElementById("email").innerHTML = email;
@@ -192,7 +200,6 @@ include_once 'nav.php';
     if (password) document.getElementById("password").innerHTML = password;
     if (address) document.getElementById("address").innerHTML = address;
     if (birthday) document.getElementById("birthday").innerHTML = birthday;
-    if (payment) document.getElementById("payment").innerHTML = payment;
 </script>
 </body>
 </html>

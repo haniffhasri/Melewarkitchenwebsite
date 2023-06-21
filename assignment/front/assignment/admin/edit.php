@@ -7,7 +7,7 @@
     $password = $_POST['password'];
     $birthDate = $_POST['birthDate'];
     $address = $_POST['address'];
-    echo '<br>'.$userID;
+    //echo '<br>'.$userID;
 ?>
 
 <html>
