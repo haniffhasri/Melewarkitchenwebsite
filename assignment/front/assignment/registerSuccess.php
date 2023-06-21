@@ -1,3 +1,41 @@
+<?php
+session_start();
+include_once 'config.php';
+if(isPost()) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Incorrect email format" .$email;
+        die();
+    }
+
+    $query = "select * from user where email ='".$email."'";
+    $result = $mysqli->query($query);
+    if($result->num_rows > 0){
+        $data=[];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $data[]=$row;
+        }
+        $user=$data[0];
+        if(!empty($user)){
+            if($user['password'] == $password){
+                $_SESSION["username"]= $user['userName'];
+                echo "Log in successfully";
+//            header("Location: home.php");
+            }else{
+                echo "Incorrect password";
+            }
+
+        }else{
+            echo "Log in failed";
+        }
+    }else{
+        echo "This email is not registered" .$email;
+    }
+    die();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,38 +54,26 @@
 </head>
 <body>
     <header>
-    <nav>
-        <div class="container nav-container">
-            <a href="home.html">
-                <img src="./res/logo.jpg"  alt="melewarkitchenlogo" width="100px">
-            </a>
-            <ul class="nav-menu">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="menu.php">Menu</a></li>
-                <li><a href="reservation.html">Reservation</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="profile.html">Profile</a></li>
-            </ul>
-            <button id="open-menu-btn"><i class="uil uil-bars"></i></button>
-            <button id="close-menu-btn"><i class="uil uil-multiply"></i></button>
-        </div>
-    </nav></header>
+        <?php
+        include_once 'nav.php';
+        ?>
+    </header>
     <!---------------------------------------------------- END OF NAVBAR ---------------------------------------->
 
     <!----------------------------------------------- PAGE CONTENT START HERE ----------------------------------->
     <main class="bg-image">
         <div class="border">
             <div class="form-box login">
-                <h2>Login</h2>
-                <form action="#">
+                <h2>Register successfully! You can login now!</h2>
+                <form action="login.php" method="post">
                     <div class="input-box">
                         <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                        <input id="email" type="text" required>
+                        <input id="email" name="email" type="text" required>
                         <label>Email</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                        <input id="password" type="password" required>
+                        <input id="password" name="password" type="password" required>
                         <label>Password</label>
                     </div>
                     <div class="remember-forgot">
@@ -57,7 +83,7 @@
                     <button type="submit" id="loginbtn" class="btnSubmit">Login</button>
                     <div class="login-register">
                         <p>Don't have an account? 
-                            <a href="#" class="register-link">Register</a> </p>
+                            <a href="register.php" class="register-link">Register</a> </p>
                     </div>
                 </form>
             </div>

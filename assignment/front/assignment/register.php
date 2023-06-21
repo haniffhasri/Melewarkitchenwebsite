@@ -1,3 +1,51 @@
+<?php
+    include_once 'config.php';
+    if(isPost()) {
+        $userName = $_POST['userName'];
+        $mail = $_POST['mail'];
+        $phoneNumber = $_POST['phone'];
+        $password = $_POST['password'];
+
+
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            echo "<p>Incorrect email format</p>";
+            die();
+        }
+
+        // Check if the username exists
+        $query = "SELECT * FROM user WHERE userName ='".$userName."'";
+        $result = $mysqli->query($query);
+        if($result->num_rows > 0){
+            echo "<script>alert('This username already exists.');</script>";
+            // prompt
+        } else {
+            $query = "SELECT * FROM user WHERE email ='".$mail."'";
+            $result = $mysqli->query($query);
+            if($result->num_rows > 0){
+                echo "<script>alert('This email already exists.');</script>";
+                // prompt
+            } else {
+                $query = "SELECT * FROM user WHERE phoneNumber ='".$phoneNumber."'";
+                $result = $mysqli->query($query);
+                if($result->num_rows > 0){
+                    echo "<script>alert('This phone number already exists');</script>";
+                    // prompt
+                } else {
+                    
+                    $query = "INSERT INTO `user`(userName,email, phoneNumber,password) VALUES (?,?,?,?)";
+                    $stmt = $mysqli->prepare($query);
+                    $stmt->bind_param("ssss", $userName, $mail, $phoneNumber, $password);
+                    if ($stmt->execute()) {
+                        header("Location: registerSuccess.php"); // jump to log in
+                        exit(); 
+                    } else {
+                        echo "<p>Register failed!</p>"; 
+                    }
+                }
+            }
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,73 +64,39 @@
 </head>
 <body>
     <header>
-    <nav>
-        <div class="container nav-container">
-            <a href="home.html">
-                <img src="./res/logo.jpg"  alt="melewarkitchenlogo" width="100px">
-            </a>
-            <ul class="nav-menu">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="menu.php">Menu</a></li>
-                <li><a href="reservation.html">Reservation</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="profile.html">Profile</a></li>
-            </ul>
-            <button id="open-menu-btn"><i class="uil uil-bars"></i></button>
-            <button id="close-menu-btn"><i class="uil uil-multiply"></i></button>
-        </div>
-    </nav></header>
+        <?php
+        include_once 'nav.php';
+        ?>
+    </header>
     <!---------------------------------------------------- END OF NAVBAR ---------------------------------------->
 
     <!----------------------------------------------- PAGE CONTENT START HERE ----------------------------------->
     <main class="bg-image">
         <div class="border">
-            <div class="form-box login">
-                <h2>Login</h2>
-                <form action="#">
-                    <div class="input-box">
-                        <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                        <input id="email" type="text" required>
-                        <label>Email</label>
-                    </div>
-                    <div class="input-box">
-                        <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                        <input id="password" type="password" required>
-                        <label>Password</label>
-                    </div>
-                    <div class="remember-forgot">
-                        <!--<label><input type="checkbox">Remember Me</label>-->
-                        <a href="password_reset.html">Forgot Password?</a>
-                    </div>
-                    <button type="submit" id="loginbtn" class="btnSubmit">Login</button>
-                    <div class="login-register">
-                        <p>Don't have an account? 
-                            <a href="#" class="register-link">Register</a> </p>
-                    </div>
-                </form>
-            </div>
-
-            <div class="form-box register">
+            <div class="form-box">
                 <h2>Registration</h2>
-                <form action="#">
+                <form action="register.php" method="post">
                     <div class="input-box">
-                        <span class="icon"><ion-icon name="person"></ion-icon></span>
-                        <input type="text" required>
+                        <span class="icon"><ion-icon name="userName"></ion-icon></span>
+                        <input type="text" name="userName" required>
                         <label>Username</label>
                     </div>
-                    <div class="input-box">
-                        <span class="icon"><ion-icon name="location"></ion-icon></span>
-                        <input type="text" required>
-                        <label>Address</label>
-                    </div>
+
                     <div class="input-box">
                         <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                        <input id="emailreg" type="text" required>
+                        <input id="emailreg" type="text" name="mail" required>
                         <label>Email</label>
                     </div>
+
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="phone"></ion-icon></span>
+                        <input type="text" name="phone" required>
+                        <label>Phone number</label>
+                    </div>
+                    
                     <div class="input-box">
                         <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                        <input id="passreg" type="password" required>
+                        <input id="passreg" type="password" name="password" required>
                         <label>Password</label>
                     </div>
                     <div class="remember-forgot">
@@ -91,7 +105,7 @@
                     <button id="regbtn" type="submit" class="btnSubmit">Register</button>
                     <div class="login-register">
                         <p>Already have an account? 
-                            <a href="#" class="login-link">Login</a> </p>
+                            <a href="login.php" class="login-link">Login</a> </p>
                     </div>
                 </form>
             </div>
@@ -179,5 +193,22 @@
     </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        <?php if(!empty($errorMessages)): ?>
+           //When the error message exists, a Tooltip pops up
+            for (var i = 0; i < errorMessages.length; i++) {
+            alert(errorMessages[i]);
+             }
+        <?php endif; ?>
+    </script>
+    
+  <script>
+        <?php
+            if ($result->num_rows > 0) {
+                echo "alert('Please change your register information.');";
+            }
+        ?>
+    </script>
+
 </body>
 </html>
