@@ -17,7 +17,6 @@ function openMenu(evt, menuName) {
     document.getElementById(menuName).style.display = "block";
     evt.currentTarget.className += " active";
   }
-  document.getElementById("myLink").click();
 //irfanlogin
 const wrapper = document.querySelector('.border');
 const loginLink = document.querySelector('.login-link');
@@ -36,33 +35,3 @@ loginbtn.addEventListener('click',()=>{
 });
 
   //register
-  var emailreg = document.getElementById('emailreg');
-  var passreg = document.getElementById('passreg');
-  var regbtn = document.getElementById('regbtn');
-  var nemail;
-  var npass;
-  regbtn.addEventListener('click',()=>{
-    register()
-  })
-  function register(){
-    nemail = emailreg.value;
-    npass = passreg.value;
-    alert("Email : "+nemail+"\n"+"Password : "+npass+"\n"+"Successfully register");
-  }
-  function login() {
-    var username = document.getElementById('email').value;
-    var password = document.getElementById('password').value
-    
-    // Perform authentication check here (e.g. send a request to server-side code)
-    if (username === "test" && password === "123") {
-        window.location.href = "home.html";
-      alert("Login successful!");
-      
-    }
-    else if (username === "admin" && password === "admin") {
-      window.location.href = "./admin/home.html";
-    alert("Admin login successful!");
-    }else {
-      alert("Incorrect username or password");
-    }
-  }

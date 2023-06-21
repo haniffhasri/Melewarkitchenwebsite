@@ -13,7 +13,7 @@ $mysqli = new mysqli($host, $username, $password, $dbname);
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }else{
-    echo("Database successfully connect");
+    //echo("Database successfully connect");
 }
 
 ?>
