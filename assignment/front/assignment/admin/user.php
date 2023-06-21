@@ -21,7 +21,7 @@
                 <ul class="nav-menu">
                     <li><a href="home.html">Home</a></li>
                     <li><a href="user.php">User Management</a></li>
-                    <li><a href="table.html">Table Management</a></li>
+                    <li><a href="table.php">Table Management</a></li>
                     <li><a href="editmenu.php">Menu Management</a></li>
                     <li><a href="/front/assignment/home.html">Logout</a></li>
                 </ul>
