@@ -1,6 +1,10 @@
 <?php
 session_start();
-unset($_SESSION["username"]);
-//header("Location: home.php");
-echo "Log out successfully";
+
+// Unset the logged_in session variable
+unset($_SESSION['logged_in']);
+
+// Redirect to login.php
+header("Location: login.php");
+exit;
 ?>

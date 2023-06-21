@@ -1,41 +1,3 @@
-<?php
-session_start();
-include_once 'config.php';
-if(isPost()) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Incorrect email format" .$email;
-        die();
-    }
-
-    $query = "select * from user where email ='".$email."'";
-    $result = $mysqli->query($query);
-    if($result->num_rows > 0){
-        $data=[];
-        while ($row = mysqli_fetch_assoc($result)) {
-            $data[]=$row;
-        }
-        $user=$data[0];
-        if(!empty($user)){
-            if($user['password'] == $password){
-                $_SESSION["username"]= $user['userName'];
-                echo "Log in successfully";
-//            header("Location: home.php");
-            }else{
-                echo "Incorrect password";
-            }
-
-        }else{
-            echo "Log in failed";
-        }
-    }else{
-        echo "This email is not registered" .$email;
-    }
-    die();
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,6 +24,35 @@ if(isPost()) {
 
     <!----------------------------------------------- PAGE CONTENT START HERE ----------------------------------->
     <main class="bg-image">
+    <?php
+            include 'config.php';
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+
+                // Database connection
+                if ($mysqli->connect_error) {
+                    die("Failed to connect: " . $mysqli->connect_error);
+                } else {
+                    $stmt = $mysqli->prepare("SELECT * FROM user WHERE email = ? AND password = ?");
+                    $stmt->bind_param("ss", $email, $password);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    if ($result->num_rows == 1) {
+                        // Successful login
+                        $_SESSION['logged_in'] = true;
+                        echo '<script>alert("Login Successfully");</script>';
+                        header("Location: home.php");
+                        exit;
+                    } else {
+                        // Failed login
+                        echo '<script>alert("Failed login");</script>';
+                    }
+                }
+            }
+        ?>
         <div class="border">
             <div class="form-box login">
                 <h2>Login</h2>

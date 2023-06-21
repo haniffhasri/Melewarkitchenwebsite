@@ -1,51 +1,3 @@
-<?php
-    include_once 'config.php';
-    if(isPost()) {
-        $userName = $_POST['userName'];
-        $mail = $_POST['mail'];
-        $phoneNumber = $_POST['phone'];
-        $password = $_POST['password'];
-
-
-        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-            echo "<p>Incorrect email format</p>";
-            die();
-        }
-
-        // Check if the username exists
-        $query = "SELECT * FROM user WHERE userName ='".$userName."'";
-        $result = $mysqli->query($query);
-        if($result->num_rows > 0){
-            echo "<script>alert('This username already exists.');</script>";
-            // prompt
-        } else {
-            $query = "SELECT * FROM user WHERE email ='".$mail."'";
-            $result = $mysqli->query($query);
-            if($result->num_rows > 0){
-                echo "<script>alert('This email already exists.');</script>";
-                // prompt
-            } else {
-                $query = "SELECT * FROM user WHERE phoneNumber ='".$phoneNumber."'";
-                $result = $mysqli->query($query);
-                if($result->num_rows > 0){
-                    echo "<script>alert('This phone number already exists');</script>";
-                    // prompt
-                } else {
-                    
-                    $query = "INSERT INTO `user`(userName,email, phoneNumber,password) VALUES (?,?,?,?)";
-                    $stmt = $mysqli->prepare($query);
-                    $stmt->bind_param("ssss", $userName, $mail, $phoneNumber, $password);
-                    if ($stmt->execute()) {
-                        header("Location: registerSuccess.php"); // jump to log in
-                        exit(); 
-                    } else {
-                        echo "<p>Register failed!</p>"; 
-                    }
-                }
-            }
-        }
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,19 +36,19 @@
 
                     <div class="input-box">
                         <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                        <input id="emailreg" type="text" name="mail" required>
+                        <input id="email" type="text" name="email" required>
                         <label>Email</label>
                     </div>
 
                     <div class="input-box">
                         <span class="icon"><ion-icon name="phone"></ion-icon></span>
-                        <input type="text" name="phone" required>
+                        <input type="text" name="phoneNumber" required>
                         <label>Phone number</label>
                     </div>
                     
                     <div class="input-box">
                         <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                        <input id="passreg" type="password" name="password" required>
+                        <input id="password" type="password" name="password" required>
                         <label>Password</label>
                     </div>
                     <div class="remember-forgot">
@@ -110,6 +62,36 @@
                 </form>
             </div>
         </div>
+
+        <?php
+            include 'config.php';
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userName'])) {
+                $userName = mysqli_real_escape_string($mysqli, $_POST['userName']);
+                $email = mysqli_real_escape_string($mysqli, $_POST['email']);
+                $phoneNumber = mysqli_real_escape_string($mysqli, $_POST['phoneNumber']);
+                $password = mysqli_real_escape_string($mysqli, $_POST['password']);
+
+                // Validate input data
+                if (empty($userName) || empty($email) || empty($phonenumber) || empty($password)) {
+                    echo 'Please fill in all the fields.';
+                } else {
+                    // Hash the password
+                   
+
+                    // Prepare and execute the query
+                    $query = "INSERT INTO user (userName, email, phoneNumber, `password`) VALUES ('$userName', '$email', '$phoneNumber', '$password')";
+                    $result = mysqli_query($mysqli, $query);
+
+                    if ($result) {
+                        $_SESSION['logged_in'] = true;
+                        exit;
+                    } else {
+                        echo 'Error: ' . mysqli_error($mysqli);
+                    }
+                }
+            }
+        ?>
     </main>
     <!------------------------------------------------- END OF PAGE CONTENT ------------------------------------->
 
